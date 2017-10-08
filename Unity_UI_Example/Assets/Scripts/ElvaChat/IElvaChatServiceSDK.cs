@@ -9,7 +9,7 @@ public interface IElvaChatServiceSDK
 	void showElvaOP(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag,Dictionary<string,object> config, int defaultTabIndex);
 	void showFAQs();
 	void showFAQs(Dictionary<string,object> config);
-	void showConversation(string uid,string serverId);
+	void showConversation(string playerUid,string serverId);
 	void showSingleFAQ (string faqId);
 	void showSingleFAQ (string faqId, Dictionary<string,object> config);
     void setName(string game_name);

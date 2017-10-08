@@ -39,9 +39,27 @@ public class PanelManager : MonoBehaviour {
 		#endif
 	}
 
-	public void LaunchAISupport()
+	public void AIChat()
 	{
-		ElvaChatService.Instance.ShowElva ("TEST_PLAYER_ID", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
+		ElvaChatService.Instance.ShowElva ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
+	}
+
+	public void OperationModule()
+	{
+		ElvaChatService.Instance.ShowElvaOP ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
+	}
+
+	public void ShowFaq()
+	{
+		ElvaChatService.Instance.SetUserName ("TEST_PLAYER_NAME");
+		ElvaChatService.Instance.SetUserId ("TEST_UID_123");
+		ElvaChatService.Instance.ShowFAQs ();
+	}
+
+	public void VIPChat()
+	{
+		ElvaChatService.Instance.SetUserName ("TEST_PLAYER_NAME");
+		ElvaChatService.Instance.ShowConversation ("TEST_UID_123");
 	}
 
 	public void OpenPanel (Animator anim)

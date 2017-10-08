@@ -12,7 +12,8 @@ public class ElvaChatServiceSDKAndroid:IElvaChatServiceSDK
 		currentActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
 		sdk = new AndroidJavaClass("com.ljoy.chatbot.sdk.ELvaChatServiceSdk");
 
-		sdk.CallStatic ("init", currentActivity, "SLOTS_app_3372a5c9998540b08da6019f4ff2f6da", "slots.CS30.NET", "slots_platform_2803a29c-e53c-435b-a527-56eab1adfa93");
+		// Change the appkey, domain and appId according to your own app, respectively
+		init("TRYELVA_app_5a6b4540bbee4d7280fda431700ed71a", "TryElva.AIHELP.NET", "TryElva_platform_14970be5-d3bf-4f91-8c70-c2065cc65e9a");
 	}
 
 	public void init(string appKey,string domain,string appId){
@@ -55,13 +56,13 @@ public class ElvaChatServiceSDKAndroid:IElvaChatServiceSDK
 		sdk.CallStatic("showSingleFAQ",faqId,javaMap);
 	}
 
-	public void showConversation(string uid,string serverId){
-		sdk.CallStatic("showConversation",uid,serverId);
+	public void showConversation(string playerUid,string serverId){
+		sdk.CallStatic("showConversation",playerUid,serverId);
 	}
 
-	public void showConversation(string uid,string serverId,Dictionary<string,object> config){
+	public void showConversation(string playerUid,string serverId,Dictionary<string,object> config){
 		AndroidJavaObject javaMap = customMap(config);
-		sdk.CallStatic("showConversation",uid,serverId,javaMap);
+		sdk.CallStatic("showConversation",playerUid,serverId,javaMap);
 	}
 
 
