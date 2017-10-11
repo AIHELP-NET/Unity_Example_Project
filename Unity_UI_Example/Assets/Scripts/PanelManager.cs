@@ -15,9 +15,14 @@ public class PanelManager : MonoBehaviour {
 	const string k_OpenTransitionName = "Open";
 	const string k_ClosedStateName = "Closed";
 
-	#if !UNITY_EDITOR
 	private ElvaChatService elvaChatService;
-	#endif
+
+
+	void Awake()
+	{
+		Debug.Log ("Initialize AI Help SDK");
+		initAIHelpSDK ();
+	}
 
 	public void OnEnable()
 	{
@@ -28,29 +33,30 @@ public class PanelManager : MonoBehaviour {
 
 		OpenPanel(initiallyOpen);
 
-		Debug.Log ("Initialize AI Help SDK");
-		initAIHelpSDK ();
 	}
 
 	private void initAIHelpSDK()
 	{
-		#if !UNITY_EDITOR
 		elvaChatService = ElvaChatService.Instance;
-		#endif
 	}
 
 	public void AIChat()
 	{
+		Debug.Log ("Open AIChat");
 		ElvaChatService.Instance.ShowElva ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
 	}
 
 	public void OperationModule()
 	{
-		ElvaChatService.Instance.ShowElvaOP ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
+		Debug.Log ("Open Operational");
+		Dictionary<string, object> config = new Dictionary<string, object> ();
+		config.Add ("dic1", "aaa");
+		ElvaChatService.Instance.ShowElvaOP ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1", config);
 	}
 
 	public void ShowFaq()
 	{
+		Debug.Log ("Show FAQ");
 		ElvaChatService.Instance.SetUserName ("TEST_PLAYER_NAME");
 		ElvaChatService.Instance.SetUserId ("TEST_UID_123");
 		ElvaChatService.Instance.ShowFAQs ();
@@ -58,6 +64,7 @@ public class PanelManager : MonoBehaviour {
 
 	public void VIPChat()
 	{
+		Debug.Log ("Show Conversation");
 		ElvaChatService.Instance.SetUserName ("TEST_PLAYER_NAME");
 		ElvaChatService.Instance.ShowConversation ("TEST_UID_123");
 	}
