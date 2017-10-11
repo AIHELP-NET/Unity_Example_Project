@@ -1,22 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ElvaChatService
+public class AIhelpServiceExample
 {
     private IElvaChatServiceSDK sdk;
 
     private string serverId = "1";
 
-    private static ElvaChatService _instance;
+    private static AIhelpServiceExample _instance;
 
-    public static ElvaChatService Instance
+    public static AIhelpServiceExample Instance
     {
         get{
-            return _instance ?? (_instance = new ElvaChatService());
+            return _instance ?? (_instance = new AIhelpServiceExample());
         }
     }
 
-    public ElvaChatService()
+    public AIhelpServiceExample()
     {
         #if UNITY_ANDROID
             if(Application.platform == RuntimePlatform.Android)
@@ -42,20 +42,10 @@ public class ElvaChatService
     {
         if(sdk != null)
         {
-			Dictionary<string, object> dict = new Dictionary<string, object>();
-			Dictionary<string, object> dict2 = new Dictionary<string, object> () {
-				{ "new", "old"}
-			};
+			Dictionary<string, object> tags = new Dictionary<string, object> ();
+			tags.Add ("hs-tags", new List<string> (){"vip1", "pay1"});
 
-			dict.Add ("test1", "value1");
-			dict.Add ("test2", new List<string> (){"iuu"});
-			dict.Add ("test3", dict2);
-
-			#if UNITY_ANDROID
-			sdk.showFAQs(dict);
-			#elif UNITY_IOS
-			sdk.showFAQs();
-			#endif
+			sdk.showFAQs(tags);
         }
     }
 	public void ShowElva(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag)
