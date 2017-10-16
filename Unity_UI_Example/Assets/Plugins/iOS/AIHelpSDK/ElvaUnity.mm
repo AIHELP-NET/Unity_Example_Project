@@ -153,6 +153,7 @@ extern "C"{
     NSDictionary* char2NSDictionary (const char* string)
     {
         NSString *jsonStr =  char2NSString(string);
+        NSLog(@"unity config json解析：%@",jsonStr);
         if([jsonStr isEqualToString:@""]){
             return nil;
         }
@@ -164,24 +165,11 @@ extern "C"{
                 NSLog(@"unity config json解析失败：%@",err);
                 return nil;
             }
+            NSLog(@"unity config json解析：返回正常NSDictionary");
             return dic;
         }else{
             return nil;
         }
-    }
-    
-    NSMutableDictionary* dic2NSMutableDictionary(NSDictionary *dic){
-        NSMutableDictionary * muDic = [[NSMutableDictionary alloc]initWithCapacity:0];
-        for (id item in dic) {
-            id value = [dic objectForKey:item];
-            if([value isKindOfClass:[NSDictionary class]]){
-                NSMutableDictionary *tmp = dic2NSMutableDictionary(item);
-                [muDic setObject:tmp forKey:item];
-            }else{
-                [muDic setObject:value forKey:item];
-            }
-        }
-        return muDic;
     }
     
     NSMutableDictionary* customerData2Dic(const char* string){
@@ -189,7 +177,8 @@ extern "C"{
         if(!dic){
             return nil;
         }
-        NSMutableDictionary * customMap = dic2NSMutableDictionary(dic);
+        NSMutableDictionary *customMap = [dic mutableCopy];
+        NSLog(@"customMap - %@",customMap);
         return customMap;
     }
     

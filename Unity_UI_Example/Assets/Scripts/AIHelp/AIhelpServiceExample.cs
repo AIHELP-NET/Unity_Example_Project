@@ -20,15 +20,14 @@ public class AIhelpServiceExample
     {
         #if UNITY_ANDROID
             if(Application.platform == RuntimePlatform.Android)
-                sdk = new ElvaChatServiceSDKAndroid();
+			sdk = new ElvaChatServiceSDKAndroid("TRYELVA_app_5a6b4540bbee4d7280fda431700ed71a", "TryElva.AIHELP.NET", "TryElva_platform_14970be5-d3bf-4f91-8c70-c2065cc65e9a");
         #endif
 		#if UNITY_IOS
 			if(Application.platform == RuntimePlatform.IPhonePlayer)
-				sdk = new ElvaChatServiceSDKIOS();
+		    sdk = new ElvaChatServiceSDKIOS("TRYELVA_app_5a6b4540bbee4d7280fda431700ed71a","TryElva.AIHELP.NET", "TryElva_pf_ec28eb91dd7d463bb359fc53d43dcfd6");
 		#endif
-		postInitSetting();
+		postInitSetting ();
     }
-
     private void postInitSetting()
     {
         if(sdk != null)
@@ -43,9 +42,14 @@ public class AIhelpServiceExample
         if(sdk != null)
         {
 			Dictionary<string, object> tags = new Dictionary<string, object> ();
-			tags.Add ("hs-tags", new List<string> (){"vip1", "pay1"});
-
-			sdk.showFAQs(tags);
+			List<string> tag = new List<string>();
+			tag.Add ("server1");
+			tag.Add ("pay3");
+			tags.Add ("elva-tags", tag);
+			Dictionary<string, object> config = new Dictionary<string, object> ();
+			config.Add ("elva-custom-metadata", tags);
+			config.Add("showConversationFlag", "1");
+			sdk.showFAQs(config);
         }
     }
 	public void ShowElva(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag)

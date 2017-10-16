@@ -7,13 +7,14 @@ public class ElvaChatServiceSDKAndroid:IElvaChatServiceSDK
 	private AndroidJavaObject currentActivity;
 
 
-	public ElvaChatServiceSDKAndroid(){
+	public ElvaChatServiceSDKAndroid(string appKey, string domain, string appId)
+	{
 		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 		currentActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
 		sdk = new AndroidJavaClass("com.ljoy.chatbot.sdk.ELvaChatServiceSdk");
 
-		// Change the appkey, domain and appId according to your own app, respectively
-		init("TRYELVA_app_5a6b4540bbee4d7280fda431700ed71a", "TryElva.AIHELP.NET", "TryElva_platform_14970be5-d3bf-4f91-8c70-c2065cc65e9a");
+		// pass the appkey, domain and appId of your own app, respectively
+		init(appKey, domain, appId);
 	}
 
 	public void init(string appKey,string domain,string appId){
@@ -109,10 +110,8 @@ public class ElvaChatServiceSDKAndroid:IElvaChatServiceSDK
 	}
 
 	private AndroidJavaObject customMap(Dictionary<string,object> dic){
-		AndroidJavaObject map1 = new AndroidJavaObject("java.util.HashMap");
 		AndroidJavaObject map = dicToMap(dic);
-		map1.Call<string>("put","hs-custom-metadata",map);
-		return map1;
+		return map;
 	}
 	private AndroidJavaObject dicToMap(Dictionary<string,object> dic){
 		AndroidJavaObject map = new AndroidJavaObject("java.util.HashMap");

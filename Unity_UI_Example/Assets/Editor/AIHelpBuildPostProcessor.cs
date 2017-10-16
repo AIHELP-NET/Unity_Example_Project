@@ -2,9 +2,8 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
+#if UNITY_IOS
 using UnityEditor.iOS.Xcode;
-
-
 public class AIHelpBuildPostProcessor
 {
 
@@ -37,3 +36,4 @@ public class AIHelpBuildPostProcessor
 		project.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
 	}
 }
+#endif

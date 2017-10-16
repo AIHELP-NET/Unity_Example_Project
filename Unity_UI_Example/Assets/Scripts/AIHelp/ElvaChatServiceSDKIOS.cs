@@ -54,9 +54,9 @@ public class ElvaChatServiceSDKIOS:IElvaChatServiceSDK
 			[DllImport ("__Internal")]
 			private static extern void elvaSetEvaluateStar (int star);
 
-	public ElvaChatServiceSDKIOS()
+    public ElvaChatServiceSDKIOS(string appKey, string domain, string appId)
 	{
-		init("TRYELVA_app_5a6b4540bbee4d7280fda431700ed71a", "TryElva.AIHELP.NET", "TryElva_pf_ec28eb91dd7d463bb359fc53d43dcfd6");
+        init(appKey, domain, appId);
 	}
 	public void init(string appKey,string domain,string appId){
 		elvaInit(appKey,domain,appId);
@@ -67,11 +67,12 @@ public class ElvaChatServiceSDKIOS:IElvaChatServiceSDK
 	}
 	public void showElva(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag,Dictionary<string,object> config)
 	{
-		elvaShowElvaWithConfig(playerName,playerUid,serverId,playerParseId,showConversationFlag,AIHelpMiniJSON.Json.Serialize(config));
+		string jsonConf = AIHelpMiniJSON.Json.Serialize(config);
+		elvaShowElvaWithConfig(playerName,playerUid,serverId,playerParseId,showConversationFlag,jsonConf);
 	}
 	public void showElvaOP(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag)
 	{
-		elvaShowElvaOP(playerName,playerUid,serverId,playerParseId,showConversationFlag,AIHelpMiniJSON.Json.Serialize("{}"));
+		elvaShowElvaOP(playerName,playerUid,serverId,playerParseId,showConversationFlag,AIHelpMiniJSON.Json.Serialize(""));
 	}
 	public void showElvaOP(string playerName,string playerUid,string serverId,string playerParseId,string showConversationFlag,Dictionary<string,object> config)
 	{
@@ -82,7 +83,8 @@ public class ElvaChatServiceSDKIOS:IElvaChatServiceSDK
 		elvaShowElvaOPWithTabIndex(playerName,playerUid,serverId,playerParseId,showConversationFlag,AIHelpMiniJSON.Json.Serialize(config), defaultTabIndex);
 	}
 	public void showConversation(string playerUid,string serverId)
-	{//请优先实现setUserName接口
+	{
+		//call setUserName before this method
 		elvaShowConversation(playerUid,serverId);
 	}
 	public void showConversation(string playerUid,string serverId,Dictionary<string,object> config)

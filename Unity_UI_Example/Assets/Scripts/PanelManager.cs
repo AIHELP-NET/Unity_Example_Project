@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using AIHelpMiniJSON;
+
 
 public class PanelManager : MonoBehaviour {
 
@@ -15,7 +17,7 @@ public class PanelManager : MonoBehaviour {
 	const string k_OpenTransitionName = "Open";
 	const string k_ClosedStateName = "Closed";
 
-	private AIhelpServiceExample elvaChatService;
+	private AIhelpServiceExample aihelpService;
 
 
 	void Awake()
@@ -37,21 +39,33 @@ public class PanelManager : MonoBehaviour {
 
 	private void initAIHelpSDK()
 	{
-		elvaChatService = AIhelpServiceExample.Instance;
+		aihelpService = AIhelpServiceExample.Instance;
 	}
 
 	public void AIChat()
 	{
 		Debug.Log ("Open AIChat");
-		AIhelpServiceExample.Instance.ShowElva ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1");
+		Dictionary<string, object> tags = new Dictionary<string, object> ();
+		List<string> tag = new List<string>();
+		tag.Add ("server1");
+		tag.Add ("pay3");
+		tags.Add ("elva-tags", tag);
+		Dictionary<string, object> config = new Dictionary<string, object> ();
+		config.Add ("elva-custom-metadata", tags);
+		AIhelpServiceExample.Instance.ShowElva ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1", config);
 	}
 
 	public void OperationModule()
 	{
 		Debug.Log ("Open Operational");
+		Dictionary<string, object> tags = new Dictionary<string, object> ();
+		List<string> tag = new List<string>();
+		tag.Add ("server1");
+		tag.Add ("pay3");
+		tags.Add ("elva-tags", tag);
 		Dictionary<string, object> config = new Dictionary<string, object> ();
-		config.Add ("dic1", "aaa");
-		AIhelpServiceExample.Instance.ShowElvaOP ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1", config);
+		config.Add ("elva-custom-metadata", tags);
+		AIhelpServiceExample.Instance.ShowElvaOP ("TEST_PLAYER_NAME", "TEST_UID_123", "TEST_SRV_ID_123", "", "1", config, 999);
 	}
 
 	public void ShowFaq()
