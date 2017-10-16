@@ -153,7 +153,6 @@ extern "C"{
     NSDictionary* char2NSDictionary (const char* string)
     {
         NSString *jsonStr =  char2NSString(string);
-        NSLog(@"unity config json解析：%@",jsonStr);
         if([jsonStr isEqualToString:@""]){
             return nil;
         }
@@ -165,7 +164,6 @@ extern "C"{
                 NSLog(@"unity config json解析失败：%@",err);
                 return nil;
             }
-            NSLog(@"unity config json解析：返回正常NSDictionary");
             return dic;
         }else{
             return nil;
@@ -178,7 +176,6 @@ extern "C"{
             return nil;
         }
         NSMutableDictionary *customMap = [dic mutableCopy];
-        NSLog(@"customMap - %@",customMap);
         return customMap;
     }
     
