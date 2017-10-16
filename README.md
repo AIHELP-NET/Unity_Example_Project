@@ -1,2 +1,3 @@
-# Unity_Example_Project
-Unity3D Example Project using AIHelp
+# Unity Example Project
+Unity3D Example Project using AIHelp SDK
+
